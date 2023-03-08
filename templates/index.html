@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+    <title>Wiki Scraper</title>
+
+</head>
+<body>
+
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <a onclick="goBack()"class="navbar-brand">Wiki Scraper</a>
+        
+        <form class="form-inline" action="/" method="post">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </nav>
+    
+      <br>
+
+    {%if info!=null%}
+
+    <div class="card mb-2 bg-light" style="max-width: 100;background-color: #e3f2fd;">
+        <div class="card-body">
+            <div class="row no-gutters">
+                <div class="col-md-3">
+                  <img src="{{info['image']}}" class="card-img" alt="image">
+                </div> 
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">{{info['title']}}</h5>
+      
+                    {%for i in info['paragraphs']%}
+                    <p class="card-text">{{i.get_text()}}</p>
+                    {%endfor%}
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+
+    {%endif%}
+
+    {%if error==1%}
+    <div style="width: 100;display: flex;justify-content: center;">
+        <div class="card text-white bg-warning " style="max-width: 50rem;margin: 105px;">
+            <div class="card-header">Not found</div>
+            <div class="card-body">
+            <h5 class="card-title">Error</h5>
+            <p class="card-text">Try a different search</p>
+            </div>
+        </div>
+    </div>
+    
+    {%endif%}
+
+
+    <div class="card text-center">
+        <div class="card-footer text-muted">
+            <p class="card-text">Scrape Something!</p>
+            <div style="align-items: center;">
+                <a href="https://en.wikipedia.org/wiki/Main_Page" class="btn btn-outline-primary btn-sm">Go to Wikipedia</a>
+                </a>
+            </div>
+                
+        </div>
+      </div>
+    
+    
+</body>
+</html>
